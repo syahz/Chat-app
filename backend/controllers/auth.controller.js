@@ -49,6 +49,7 @@ export const signup = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -59,6 +60,13 @@ export const login = async (req, res) => {
     }
 
     generateTokenAndSetCookie(user._id, res);
+
+    res.status(200).json({
+      _id: user._id,
+      fullName: user.fullName,
+      username: user.username,
+      profilePic: user.profilePic,
+    });
   } catch (error) {}
 };
 
